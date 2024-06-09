@@ -5,6 +5,9 @@ const App: React.FC = () => {
   const [positionHistory, setPositionHistory] = React.useState<
     { x: number; y: number; date: Date }[]
   >([]);
+  const [buttonRectanglePosition, setButtonRectanglePosition] = React.useState<
+    { x: number; y: number }[]
+  >([]);
 
   const calculateSpeed = (
     p1: { x: number; y: number; date: Date },
@@ -53,8 +56,15 @@ const App: React.FC = () => {
     >
       <div className="flex gap-2">
         <button
+          id="clickButton"
           onClick={(e) => {
             setPosition({ x: e.clientX, y: e.clientY });
+            // set rectangle of button position
+            const rect = e.currentTarget.getBoundingClientRect();
+            setButtonRectanglePosition([
+              { x: rect.left, y: rect.top },
+              { x: rect.right, y: rect.bottom },
+            ]);
           }}
           className="px-4 py-2 rounded-lg bg-red-400 text-white"
         >
@@ -72,6 +82,13 @@ const App: React.FC = () => {
       <h2>
         클릭 포지션 : ({position.x}, {position.y})
       </h2>
+      {buttonRectanglePosition.length > 0 && (
+        <h2>
+          클릭 버튼 위치 :{" "}
+          {`top: ${buttonRectanglePosition[0].y}px, left: ${buttonRectanglePosition[0].x}px, 
+        bottom: ${buttonRectanglePosition[1].y}px, right: ${buttonRectanglePosition[1].x}px`}
+        </h2>
+      )}
       <h2>평균 속도 : {averageSpeed.toFixed(2)} px/s</h2>
       <h2>표준편차 : {standardDeviationSpeed.toFixed(2)} px/s</h2>
     </div>
