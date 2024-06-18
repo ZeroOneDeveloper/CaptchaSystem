@@ -1,15 +1,34 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+
+import Index from "./pages/page";
+import Test from "./pages/test/page";
+
 import "./index.css";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import {
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
 );
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <>
+      <Route path="/" element={<Index />} />
+      <Route path="/test" element={<Test />} />
+    </>,
+  ),
+);
+
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>,
 );
 

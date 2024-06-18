@@ -1,6 +1,6 @@
 import React from "react";
 
-const App: React.FC = () => {
+const Page: React.FC = () => {
   const [position, setPosition] = React.useState({ x: 0, y: 0 });
   const [positionHistory, setPositionHistory] = React.useState<
     { x: number; y: number; date: Date }[]
@@ -95,4 +95,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default Page;
